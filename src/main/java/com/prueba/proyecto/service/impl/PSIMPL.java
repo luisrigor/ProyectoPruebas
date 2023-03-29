@@ -1,41 +1,44 @@
-package com.prueba.proyecto.service.PersonaServiceIMPL;
+package com.prueba.proyecto.service.impl;
 
 import com.prueba.proyecto.Entity.Persona;
 import com.prueba.proyecto.repository.personaRepo;
 import com.prueba.proyecto.service.PersonaService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-//import org.springFramework.stereotype.Service;
+@Service
+@RequiredArgsConstructor
 public class PSIMPL implements PersonaService {
-
-    @Autowired
-
-    private personaRepo repo;
+  //camel case
+    private final personaRepo repo;
     @Override
     public List<Persona> ConsultarPersona() {
-        return (List<Persona>) this.repo.findAll();
+            return repo.findAll();
     }
 
     @Override
     public Persona crearPersona(Persona persona) {
         persona.setEmail(persona.getEmail());
-        return this.repo.save(persona);
+        return repo.save(persona);
     }
 
     @Override
     public Persona modificarPersona(Persona persona) {
-        return this.repo.save(persona);
+        return repo.save(persona);
     }
 
     @Override
-    public Persona buscarPersona(int id) {
-        return this.repo.findById(id).get();
+    public Optional<Persona> buscarPersona(int id) {
+        return repo.findById(id);
     }
 
     @Override
     public void eliminarPersona(int id) {
-this.repo.deleteById(id);;
+        this.repo.deleteById(id);
     }
 }
