@@ -17,8 +17,9 @@ public class PSIMPL implements PersonaService {
   //camel case
     private final personaRepo repo;
     @Override
-    public List<Persona> ConsultarPersona() {
-            return repo.findAll();
+    public List<Persona> consultarPersona() {
+
+        return repo.findAll();
     }
 
     @Override
